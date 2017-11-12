@@ -1,0 +1,12 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+ctfwebscan.py	../ctfwebscan.py	1;"	kind:file	line:1
+scan	../ctfwebscan.py	/^def scan(url):$/;"	kind:function	line:12
+sys	../ctfwebscan.py	/^import sys$/;"	kind:namespace	line:8
+urllib	../ctfwebscan.py	/^import urllib$/;"	kind:namespace	line:9
+urllib2	../ctfwebscan.py	/^import urllib2$/;"	kind:namespace	line:10
+webs	../ctfwebscan.py	/^            webs = f1.read().splitlines()$/;"	kind:variable	line:43

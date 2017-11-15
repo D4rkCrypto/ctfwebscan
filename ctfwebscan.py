@@ -28,13 +28,16 @@ def scan(url):
             # 发送请求
             request = urllib2.Request(url+line, data, headers)
             response = urllib2.urlopen(request)
-            info = '['+str(response.code)+']'+url+line
+            info = '[+] '+url+line
             if response.code == 200:
+                print info
                 logs.append(info)
         except urllib2.HTTPError:
             pass
+    '''
     for log in logs:
         print log
+    '''
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:

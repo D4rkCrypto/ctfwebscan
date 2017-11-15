@@ -21,6 +21,7 @@ backup.zip
 backup.rar
 .svn/entries
 .git/config
+.ds_store
 .index.php.swp
 .index.php.swo
 index.php.bak

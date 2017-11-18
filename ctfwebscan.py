@@ -15,30 +15,29 @@ def scan(url):
     with open('dic.txt') as f2:
         lines = f2.read().splitlines()
     f2.close()
-    # logs列表用于存储有效请求记录
-    logs = []
+
     for line in lines:
         try:
-            # 设置data
-            #values = {}
-            #data = urllib.parse.urlencode(values)
-            # 设置headers
-            #user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0"
-            #headers = {'User-Agent': user_agent}
-            # 发送请求
-            #request = urllib.request.Request(url+line, data, headers)
-            #response = urllib.request.urlopen(request)
             response = urllib.request.urlopen(url+line)
-            info = '[+] '+url+line
             if response.code == 200:
-                print(info)
-                logs.append(info)
+                print('[+] '+url+line)
+                check_source_leak(url, line)
         except urllib.request.HTTPError:
             pass
-    '''
-    for log in logs:
-        print log
-    '''
+
+def check_source_leak(url, filename):
+    leak1 = '.' + filename + '.swp'
+    leak2 = '.' + filename + '.swo'
+    leak3 = filename + '.bak'
+    leak4 = filename + '~'
+    leaks = [leak1, leak2, leak3, leak4]
+    for leak in leaks:
+        try:
+            response = urllib.request.urlopen(url+leak)
+            if response.code == 200:
+                print('[+] '+url+leak)
+        except urllib.request.HTTPError:
+            pass
 
 if __name__ == '__main__':
     if len(sys.argv) == 2:

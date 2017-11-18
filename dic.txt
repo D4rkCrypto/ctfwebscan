@@ -22,10 +22,6 @@ backup.rar
 .svn/entries
 .git/config
 .ds_store
-.index.php.swp
-.index.php.swo
-index.php.bak
-index.php~
 index.php
 flag.php
 fl4g.php
@@ -69,5 +65,3 @@ backup.sql.bz2
 backup.zip
 rss.xml
 crossdomain.xml
-.admin.php.swp
-.login.php.swp

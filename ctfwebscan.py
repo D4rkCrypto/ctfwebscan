@@ -6,8 +6,8 @@ ctf web scan
 '''
 
 import sys
-import urllib
-import urllib2
+import urllib.request
+import urllib.parse
 
 def scan(url):
     '''scan function'''
@@ -20,19 +20,20 @@ def scan(url):
     for line in lines:
         try:
             # 设置data
-            values = {}
-            data = urllib.urlencode(values)
+            #values = {}
+            #data = urllib.parse.urlencode(values)
             # 设置headers
-            user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0"
-            headers = {'User-Agent': user_agent}
+            #user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:56.0) Gecko/20100101 Firefox/56.0"
+            #headers = {'User-Agent': user_agent}
             # 发送请求
-            request = urllib2.Request(url+line, data, headers)
-            response = urllib2.urlopen(request)
+            #request = urllib.request.Request(url+line, data, headers)
+            #response = urllib.request.urlopen(request)
+            response = urllib.request.urlopen(url+line)
             info = '[+] '+url+line
             if response.code == 200:
-                print info
+                print(info)
                 logs.append(info)
-        except urllib2.HTTPError:
+        except urllib.request.HTTPError:
             pass
     '''
     for log in logs:
@@ -48,4 +49,4 @@ if __name__ == '__main__':
         for web in webs:
             scan(web)
     else:
-        print "Usage: python ctfwebscan.py xxxctf-2017.txt"
+        print("Usage: python ctfwebscan.py xxxctf-2017.txt")

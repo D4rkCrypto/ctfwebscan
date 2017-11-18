@@ -46,7 +46,7 @@ def main():
         for web in webs:
             scan(web)
     else:
-        print("Usage: python ctfwebscan.py xxx.txt")
+        print("Usage: python3 main.py xxx.txt")
 
 if __name__ == '__main__':
     main()

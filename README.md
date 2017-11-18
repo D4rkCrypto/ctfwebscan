@@ -12,5 +12,5 @@ CTF中web源码泄露扫描
 将待扫描的所有url（以`/`结尾）加入`xxx.txt`。
 
 ``` bash
-python3 ctfwebscan.py xxx.txt
+python3 main.py xxx.txt
 ```

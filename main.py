@@ -1,17 +1,14 @@
-#coding: utf-8
-#author: D4rk
-
-'''
-ctf web scan
-'''
+#!/usr/bin/python3
+"""ctf web scan
+Author: D4rk
+"""
 
 import sys
 import urllib.request
 import urllib.parse
 
 def scan(url):
-    '''scan function'''
-    # 读取dic.txt中的内容存进lines
+    """print all scanned results"""
     with open('dic.txt') as f2:
         lines = f2.read().splitlines()
     f2.close()
@@ -26,6 +23,7 @@ def scan(url):
             pass
 
 def check_source_leak(url, filename):
+    """print source leak results"""
     leak1 = '.' + filename + '.swp'
     leak2 = '.' + filename + '.swo'
     leak3 = filename + '.bak'
@@ -39,13 +37,17 @@ def check_source_leak(url, filename):
         except urllib.request.HTTPError:
             pass
 
-if __name__ == '__main__':
+def main():
+    """main function"""
     if len(sys.argv) == 2:
-        # 读取xxxctf-2017.txt中的内容存进webs
         with open(sys.argv[1]) as f1:
             webs = f1.read().splitlines()
         f1.close()
         for web in webs:
             scan(web)
     else:
-        print("Usage: python ctfwebscan.py xxxctf-2017.txt")
+        print("Usage: python ctfwebscan.py xxx.txt")
+
+if __name__ == '__main__':
+    main()
+    

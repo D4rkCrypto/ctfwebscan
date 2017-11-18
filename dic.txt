@@ -46,6 +46,9 @@ test.php
 log.php
 logs.php
 config.php
+member.php
+user.php
+users.php
 robots.php
 info.php
 phpinfo.php

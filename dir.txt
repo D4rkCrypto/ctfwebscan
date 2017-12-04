@@ -1,6 +1,7 @@
 user/
 users/
 admin/
+home/
 test/
 administrator/
 houtai/
@@ -10,3 +11,4 @@ upload/
 uploads/
 download/
 downloads/
+manager/

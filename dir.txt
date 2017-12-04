@@ -7,4 +7,6 @@ houtai/
 backdoor/
 flag/
 upload/
+uploads/
 download/
+downloads/

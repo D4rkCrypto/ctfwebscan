@@ -34,6 +34,7 @@ adm1n.php
 admin1.php
 admin2.php
 adminlogin.php
+administrator.php
 login.php
 register.php
 upload.php
@@ -48,6 +49,7 @@ users.php
 robots.php
 info.php
 phpinfo.php
+backdoor.php
 fm.php
 example.php
 mysql.bak

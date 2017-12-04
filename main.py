@@ -1,23 +1,51 @@
 #!/usr/bin/python3
 """ctf web scan
 Author: D4rk
+TODO: 针对某些全站200的情况，分析返回数据包匹配"404 not found 未找到页面"字样
 """
 
 import sys
 import urllib.request
 import urllib.parse
 
-def scan(url):
-    """print all scanned results"""
-    with open('dic.txt') as f2:
-        lines = f2.read().splitlines()
-    f2.close()
+class bcolors:
+    """terminal colors"""
+    BLACK = '\033[30m'
+    RED = '\033[31m'
+    GREEN = '\033[32m'
+    YELLOW = '\033[33m'
+    BLUE = '\033[34m'
+    PURPLE = '\033[35m'
+    SKY = '\033[36m'
+    WHITE = '\033[37m'
+    ENDC = '\033[0m'
+
+def dir_scan(url):
+    """scan directories"""
+    with open('dir.txt') as f:
+        lines = f.read().splitlines()
+    f.close()
 
     for line in lines:
         try:
             response = urllib.request.urlopen(url+line)
             if response.code == 200:
-                print('[+] '+url+line)
+                print(bcolors.GREEN + str(response.code) + ' ' + bcolors.ENDC + url + line)
+                file_scan(url+line)
+        except urllib.request.HTTPError:
+            pass
+
+def file_scan(url):
+    """scan files"""
+    with open('dic.txt') as f:
+        lines = f.read().splitlines()
+    f.close()
+
+    for line in lines:
+        try:
+            response = urllib.request.urlopen(url+line)
+            if response.code == 200:
+                print(bcolors.GREEN + str(response.code) + ' ' + bcolors.ENDC + url + line)
                 check_source_leak(url, line)
         except urllib.request.HTTPError:
             pass
@@ -33,7 +61,7 @@ def check_source_leak(url, filename):
         try:
             response = urllib.request.urlopen(url+leak)
             if response.code == 200:
-                print('[+] '+url+leak)
+                print(bcolors.GREEN + str(response.code) + ' ' + bcolors.ENDC + url + leak)
         except urllib.request.HTTPError:
             pass
 
@@ -44,10 +72,10 @@ def main():
             webs = f1.read().splitlines()
         f1.close()
         for web in webs:
-            scan(web)
+            file_scan(web)
+            dir_scan(web)
     else:
         print("Usage: python3 main.py xxx.txt")
 
 if __name__ == '__main__':
     main()
-    

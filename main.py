@@ -1,3 +1,4 @@
+#coding:utf-8
 #!/usr/bin/python3
 """ctf web scan
 Author: D4rk
@@ -5,8 +6,7 @@ TODO: 针对某些全站200的情况，分析返回数据包匹配"404 not found
 """
 
 import sys
-import urllib.request
-import urllib.parse
+import requests
 
 class bcolors:
     """terminal colors"""
@@ -27,13 +27,10 @@ def dir_scan(url):
     f.close()
 
     for line in lines:
-        try:
-            response = urllib.request.urlopen(url+line)
-            if response.code == 200:
-                print(bcolors.GREEN + str(response.code) + ' ' + bcolors.ENDC + url + line)
-                file_scan(url+line)
-        except urllib.request.HTTPError:
-            pass
+        r = requests.get(url+line)
+        if r.status_code == 200:
+            print(bcolors.GREEN + str(r.status_code) + ' ' + bcolors.ENDC + url + line)
+            file_scan(url+line)
 
 def file_scan(url):
     """scan files"""
@@ -42,13 +39,10 @@ def file_scan(url):
     f.close()
 
     for line in lines:
-        try:
-            response = urllib.request.urlopen(url+line)
-            if response.code == 200:
-                print(bcolors.GREEN + str(response.code) + ' ' + bcolors.ENDC + url + line)
-                check_source_leak(url, line)
-        except urllib.request.HTTPError:
-            pass
+        r = requests.get(url+line)
+        if r.status_code == 200:
+            print(bcolors.GREEN + str(r.status_code) + ' ' + bcolors.ENDC + url + line)
+            check_source_leak(url, line)
 
 def check_source_leak(url, filename):
     """print source leak results"""
@@ -58,12 +52,9 @@ def check_source_leak(url, filename):
     leak4 = filename + '~'
     leaks = [leak1, leak2, leak3, leak4]
     for leak in leaks:
-        try:
-            response = urllib.request.urlopen(url+leak)
-            if response.code == 200:
-                print(bcolors.GREEN + str(response.code) + ' ' + bcolors.ENDC + url + leak)
-        except urllib.request.HTTPError:
-            pass
+        r = requests.get(url+leak)
+        if r.status_code == 200:
+            print(bcolors.GREEN + str(r.status_code) + ' ' + bcolors.ENDC + url + leak)
 
 def main():
     """main function"""
@@ -75,7 +66,7 @@ def main():
             file_scan(web)
             dir_scan(web)
     else:
-        print("Usage: python3 main.py xxx.txt")
+        print("Usage: python main.py xxx.txt")
 
 if __name__ == '__main__':
     main()

@@ -27,9 +27,9 @@ CTF中web源码泄露扫描
 
 ## Usage
 
-将待扫描的所有url（以`/`结尾）加入`xxx.txt`批量扫描。
+**所有url必须以`/`结尾**
 
 ``` bash
-python2 main.py xxx.txt
-python3 main.py xxx.txt
+python main.py -u [url] 独立
+python main.py -f [file] 批量
 ```

@@ -25,7 +25,6 @@ def dir_scan(url):
     with open('dir.txt') as f:
         lines = f.read().splitlines()
     f.close()
-
     for line in lines:
         r = requests.get(url+line)
         if r.status_code == 200 or r.status_code == 403:
@@ -38,7 +37,6 @@ def file_scan(url):
     with open('dic.txt') as f:
         lines = f.read().splitlines()
     f.close()
-
     for line in lines:
         r = requests.get(url+line)
         if r.status_code == 200:
@@ -60,15 +58,29 @@ def source_scan(url, filename):
 
 def main():
     """主函数"""
-    if len(sys.argv) == 2:
-        with open(sys.argv[1]) as f1:
-            webs = f1.read().splitlines()
-        f1.close()
-        for web in webs:
-            file_scan(web)
-            dir_scan(web)
-    else:
-        print("Usage: python main.py xxx.txt")
+    try:
+        if sys.argv[1].startswith('-'):
+            option = sys.argv[1][1:]
+            if option == 'f':
+                with open(sys.argv[2]) as f1:
+                    urls = f1.read().splitlines()
+                f1.close()
+                for url in urls:
+                    file_scan(url)
+                    dir_scan(url)
+            elif option == 'u':
+                url = sys.argv[2]
+                file_scan(url)
+                dir_scan(url)
+            else:
+                print("Error: 未知参数")
+                exit()
+        else:
+            print("Usage: python main.py -u http://xxx.xxx/ 独立")
+            print("       python main.py -f xxx.txt 批量")
+    except Exception as e:
+        print("Usage: python main.py -u http://xxx.xxx/ 独立")
+        print("       python main.py -f xxx.txt 批量")
 
 if __name__ == '__main__':
     main()

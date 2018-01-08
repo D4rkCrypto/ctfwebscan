@@ -33,3 +33,9 @@ CTF中web源码泄露扫描
 python main.py -u [url] 独立
 python main.py -f [file] 批量
 ```
+
+## Bugs
+
+All known bugs:
+
+- 批量扫描中，如果某一个网站请求错误，会直接exit

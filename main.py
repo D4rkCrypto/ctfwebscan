@@ -68,16 +68,19 @@ def main():
                 for url in urls:
                     file_scan(url)
                     dir_scan(url)
+                    exit()
             elif option == 'u':
                 url = sys.argv[2]
                 file_scan(url)
                 dir_scan(url)
+                exit()
             else:
                 print("Error: 未知参数")
                 exit()
         else:
             print("Usage: python main.py -u http://xxx.xxx/ 独立")
             print("       python main.py -f xxx.txt 批量")
+            exit()
     except Exception as e:
         print("Usage: python main.py -u http://xxx.xxx/ 独立")
         print("       python main.py -f xxx.txt 批量")

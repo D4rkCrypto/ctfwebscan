@@ -38,11 +38,15 @@ def file_scan(url):
         lines = f.read().splitlines()
     f.close()
     for line in lines:
-        r = requests.get(url+line)
-        if r.status_code == 200:
-            print(bcolors.GREEN + str(r.status_code) + ' ' + bcolors.ENDC + url + line)
-            # 如果扫描到存在敏感文件会进行编辑器源码泄露扫描
-            source_scan(url, line)
+        try:
+            r = requests.get(url+line)
+            if r.status_code == 200:
+                print(bcolors.GREEN + str(r.status_code) + ' ' + bcolors.ENDC + url + line)
+                # 如果扫描到存在敏感文件会进行编辑器源码泄露扫描
+                source_scan(url, line)
+        except Exception:
+            print("Error connecting to site \"%s\"" % url)
+            exit()
 
 def source_scan(url, filename):
     """扫描编辑器源码泄露"""
@@ -81,9 +85,10 @@ def main():
             print("Usage: python main.py -u http://xxx.xxx/ 独立")
             print("       python main.py -f xxx.txt 批量")
             exit()
-    except Exception as e:
+    except Exception:
         print("Usage: python main.py -u http://xxx.xxx/ 独立")
         print("       python main.py -f xxx.txt 批量")
+        exit()
 
 if __name__ == '__main__':
     main()

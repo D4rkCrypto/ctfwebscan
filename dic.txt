@@ -58,6 +58,7 @@ b.sql
 db.sql
 bdb.sql
 ddb.sql
+users.sql
 mysql.sql
 dump.sql
 data.sql
@@ -67,3 +68,6 @@ backup.sql.bz2
 backup.zip
 rss.xml
 crossdomain.xml
+robots.txt
+1.txt
+flag.txt

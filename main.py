@@ -55,11 +55,10 @@ def file_scan(url):
 
 def source_scan(url, filename):
     """扫描编辑器源码泄露"""
-    leak1 = '.' + filename + '.swp'
-    leak2 = '.' + filename + '.swo'
-    leak3 = filename + '.bak'
-    leak4 = filename + '~'
-    leaks = [leak1, leak2, leak3, leak4]
+    leaks = ['.%s.swp' % filename,
+             '.%s.swo' % filename,
+             '%s.bak' % filename,
+             '%s~' % filename]
     for leak in leaks:
         try:
             r = requests.get(url+leak, timeout=1)

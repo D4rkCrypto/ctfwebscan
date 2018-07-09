@@ -12,3 +12,4 @@ uploads/
 download/
 downloads/
 manager/
+phpmyadmin/
